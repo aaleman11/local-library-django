@@ -19,3 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
+
+urlpatters += [
+    url(r'^catalog/', include('catalog.urls')),
+]
