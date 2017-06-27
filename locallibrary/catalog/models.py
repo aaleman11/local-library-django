@@ -38,26 +38,34 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
     # Foreign Key used because book can only have one author, but authors can have multiple books
-    # Author as a string rather than object because it hasn't been declared yet in the file.
+    # Author as a string rather than object because it hasn't been declared yet in file.
     summary = models.TextField(max_length=1000, help_text="Enter a brief description of the book")
     isbn = models.CharField('ISBN', max_length=13,
                             help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
     genre = models.ManyToManyField(Genre, help_text="Select a genre for this book")
-    # ManyToManyField used because genre can contain many books. Books can cover many genres.
-    # Genre class has already been defined so we can specify the object above.
+    # ManyToManyField used because Subject can contain many books. Books can cover many subjects.
+    # Subject declared as an object because it has already been defined.
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        """
-        String for representing the Model object.
-        """
-        return self.title
 
     def get_absolute_url(self):
         """
         Returns the url to access a particular book instance.
         """
         return reverse('book-detail', args=[str(self.id)])
+
+    def display_genre(self):
+        """
+        Creates a string for the Genre. This is required to display genre in Admin.
+        """
+        return ', '.join([genre.name for genre in self.genre.all()[:3]])
+
+    display_genre.short_description = 'Genre'
+
+    def __str__(self):
+        """
+        String for representing the Model object.
+        """
+        return self.title
 
 
 class BookInstance(models.Model):
@@ -86,8 +94,7 @@ class BookInstance(models.Model):
         """
         String for representing the Model object
         """
-        # return '%s (%s)' % (self.id, self.book.title)
-        return '{1} ({2})'.format(self.id, self.book.title)
+        return '%s (%s)' % (self.id, self.book.title)
 
 
 class Author(models.Model):
@@ -95,6 +102,7 @@ class Author(models.Model):
     Model representing an author.
     """
     first_name = models.CharField(max_length=100)
+    middle_name = models.CharField(max_length=100, blank=True)          #Author may have middle name/initial
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
     date_of_death = models.DateField('Died', null=True, blank=True)
@@ -110,4 +118,4 @@ class Author(models.Model):
         String for representing the Model object
         :return: String
         """
-        return '{1}, {2}'.format(self.last_name, self.first_name)
+        return '%s, %s %s' % (self.last_name, self.first_name, self.middle_name)
