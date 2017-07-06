@@ -113,6 +113,13 @@ class Author(models.Model):
         """
         return reverse('author-detail', args=[str(self.id)])
 
+    def get_author_name(self):
+        """
+        Return the author's complete name for display
+        :return: String
+        """
+        return '%s %s %s' % (self.first_name, self.middle_name, self.last_name)
+
     def __str__(self):
         """
         String for representing the Model object
