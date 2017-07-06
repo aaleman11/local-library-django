@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 {% extends "base_generic.html" %}
 
-{% block content %}
-<h1>Logged out!</h1>
+{% load static %}
+        <link rel="stylesheet" type= "text/css" href="{% static 'css/styles.css' %}">
 
-<a href="{% url 'login'%}">Click here to login again.</a>
+{% block content %}
+<div class="centered">
+
+    <div class="jumbotron">
+        <h1>Logged out!</h1>
+
+        <a href="{% url 'login'%}">Click here to login again.</a>
+    </div>
+</div>
+
+
 {% endblock %}
