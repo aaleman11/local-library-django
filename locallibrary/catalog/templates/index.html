@@ -2,7 +2,9 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1>Local Library Home</h1>
+<body class="body-background">
+
+<h1><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Local Library Home</h1>
 
     <p>Welcome to <em>Local Library</em>, a basic Django website</p>
 
@@ -16,6 +18,11 @@
         <li><strong>Authors:</strong> {{ num_authors }}</li>
         <li><strong>Genres:</strong> {{num_genres}}</li>
       </ul>
+
+    <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+
+</body>
+
 
 
 {% endblock %}

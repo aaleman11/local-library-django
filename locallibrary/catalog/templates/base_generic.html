@@ -2,7 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        {% block title %}<title>Local Library</title>{% endblock %}
+        {% block title %}
+        <title>Local Library</title>
+        {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -10,7 +12,7 @@
 
         <!--For additional CSS files-->
         {% load static %}
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" type= "text/css" href="{% static 'css/styles.css' %}">
     </head>
 
     <body>
@@ -19,7 +21,7 @@
                  <div class="col-sm-2">
 
                  {% block sidebar %}
-                 <ul class="sidebar-nav">
+                 <ul class="nav nav-pills nav-stacked sidebar-nav sidebar-background">
                      <li><a href="{% url 'index' %}">Home</a></li>
                      <li><a href="{% url 'books' %}">All books</a></li>
                      <li><a href="{% url 'authors' %}">All authors</a></li>
