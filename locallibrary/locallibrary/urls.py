@@ -42,3 +42,5 @@ urlpatterns += [
     url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 
+
+
